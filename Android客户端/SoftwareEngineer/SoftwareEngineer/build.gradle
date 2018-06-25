@@ -1,0 +1,110 @@
+apply plugin: 'com.android.application'
+
+android {
+    compileSdkVersion cfgs.compileSdkVersion
+//    buildToolsVersion cfgs.buildToolsVersion
+    defaultConfig {
+        applicationId "cn.hhit.canteen"
+        minSdkVersion cfgs.minSdkVersion
+        targetSdkVersion cfgs.targetSdkVersion
+        versionCode cfgs.versionCode
+        versionName cfgs.versionName
+        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+    }
+    buildTypes {
+        debug {
+            //显示log
+            buildConfigField "boolean", "LOG_DEBUG", "true"
+            minifyEnabled true
+            zipAlignEnabled true
+            shrinkResources true
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+        release {
+            // 不显示log
+            buildConfigField "boolean", "LOG_DEBUG", "false"
+            // 混淆
+            minifyEnabled true
+            // Zipalign优化
+            zipAlignEnabled true
+            // 移除无用的resource
+            shrinkResources true
+            // 混淆配置
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+
+    dataBinding {
+        enabled = true
+    }
+
+    packagingOptions {
+        exclude 'META-INF/rxjava.properties'
+    }
+}
+
+dependencies {
+    implementation fileTree(include: ['*.jar'], dir: 'libs')
+    implementation 'com.android.support:appcompat-v7:26.+'
+    implementation 'com.android.support.constraint:constraint-layout:1.0.2'
+    testImplementation 'junit:junit:4.12'
+    androidTestImplementation 'com.android.support.test:runner:1.0.1'
+    androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.1'
+    implementation 'com.yanzhenjie:permission:2.0.0-rc4'
+    //    implementation 'org.greenrobot:eventbus:3.1.1'
+    //leakcanary
+    debugImplementation 'com.squareup.leakcanary:leakcanary-android:1.5.4'
+    releaseImplementation 'com.squareup.leakcanary:leakcanary-android-no-op:1.5.4'
+    //RxJava、RxAndroid
+    implementation 'io.reactivex.rxjava2:rxjava:2.1.12'
+    implementation 'io.reactivex.rxjava2:rxandroid:2.0.2'
+    //Retrofit
+    implementation 'com.squareup.retrofit2:retrofit:2.4.0'
+    implementation 'com.squareup.retrofit2:adapter-rxjava2:2.4.0'
+    implementation 'com.squareup.retrofit2:converter-gson:2.4.0'
+    //md
+    implementation 'com.android.support:design:26.+'
+    implementation 'com.android.support:recyclerview-v7:26.+'
+    implementation 'com.android.support:cardview-v7:26.+'
+    implementation 'com.android.support:palette-v7:26.+'
+    implementation 'me.majiajie:pager-bottom-tab-strip:2.2.5'
+    //glide可用：4.7.0的jar包也可以
+    //    implementation 'com.github.bumptech.glide:glide:4.0.0'
+    //glide不可用：4.1.0以上
+    //    implementation 'com.github.bumptech.glide:glide:4.1.0'
+    //    annotationProcessor 'com.github.bumptech.glide:compiler:4.1.0'
+//    implementation files('libs/annotation-4.7.0.jar')
+//    implementation files('libs/glide-full-4.7.0.jar')
+    implementation 'com.github.bumptech.glide:glide:4.5.0'
+    annotationProcessor 'com.github.bumptech.glide:compiler:4.5.0'
+    //  butterknife
+    implementation 'com.jakewharton:butterknife:8.8.1'
+    annotationProcessor 'com.jakewharton:butterknife-compiler:8.8.1'
+    // banner
+    implementation 'com.youth.banner:banner:1.4.10'
+    //最新版本
+    // 筛选框
+    implementation 'com.github.dongjunkun:DropDownMenu:1.0.4'
+    // circleimageview
+    implementation 'de.hdodenhof:circleimageview:2.2.0'
+    // glide图片转换库
+    //    implementation 'jp.wasabeef:glide-transformations:3.3.0'
+    // 动画
+    implementation 'me.immortalz:transitionhelper:2.3.4'
+    //fab
+    implementation 'com.github.clans:fab:1.6.4'
+    //bm/photoview
+    implementation 'com.bm.photoview:library:1.4.1'
+    //universal-image-loader-1.9.5.jar
+    implementation files('libs/universal-image-loader-1.9.5.jar')
+    //ultraviewpager
+    compile('com.alibaba.android:ultraviewpager:1.0.7.7@aar') {
+        transitive = true
+    }
+    //图片选择器
+    implementation 'com.github.LuckSiege.PictureSelector:picture_library:v2.2.3'
+    //luban compressPic
+    implementation 'top.zibin:Luban:1.1.7'
+    //eventbus
+    implementation 'org.greenrobot:eventbus:3.1.1'
+}

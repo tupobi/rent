@@ -1,0 +1,176 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:fab="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="cn.hhit.canteen.meal_detail.view.AtyMealDetail">
+
+    <android.support.design.widget.CoordinatorLayout
+        android:id="@+id/cl_meal_detail"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <android.support.design.widget.AppBarLayout
+            android:id="@+id/abl_meal_detail"
+            android:layout_width="match_parent"
+            android:layout_height="250dp">
+
+            <!-- contentScrim指定CollapsingToolbarLayout趋于折叠或折叠后的背景色-->
+            <!-- layout_scrollFlags与NestedScrollView的behavior属性对应-->
+            <!-- scroll表示CollapsingToolbarLayout会随着NestedScrollView一起滚动-->
+            <!-- exitUntilCollapsed表示当CollapsingToolbarLayout随着滚动完成折叠后就保留在界面上，不再移出屏幕-->
+            <android.support.design.widget.CollapsingToolbarLayout
+                android:id="@+id/ctb_meal_detail"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:fitsSystemWindows="true"
+                android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
+                app:contentScrim="@color/colorPrimary"
+                app:layout_scrollFlags="scroll|exitUntilCollapsed">
+
+                <!-- parallax在折叠过程中错位偏移-->
+                <!--<ImageView-->
+                <!--android:id="@+id/iv_meal_detail"-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="match_parent"-->
+                <!--android:scaleType="centerCrop"-->
+                <!--app:layout_collapseMode="parallax" />-->
+                <com.youth.banner.Banner
+                    android:id="@+id/banner_meal_detail_top_picture"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    app:delay_time="3000"
+                    app:image_scale_type="center_crop"
+                    app:indicator_drawable_selected="@color/colorAccent"
+                    app:indicator_height="5dp"
+                    app:indicator_margin="3dp"
+                    app:indicator_width="5dp"
+                    app:layout_collapseMode="parallax">
+
+                </com.youth.banner.Banner>
+
+                <!-- 在折叠过程中位置始终保持不变-->
+                <android.support.v7.widget.Toolbar
+                    android:id="@+id/tb_meal_detail"
+                    android:layout_width="match_parent"
+                    android:layout_height="?attr/actionBarSize"
+                    android:visibility="gone"
+                    app:layout_collapseMode="pin"
+                    app:title="meal">
+
+                </android.support.v7.widget.Toolbar>
+
+            </android.support.design.widget.CollapsingToolbarLayout>
+        </android.support.design.widget.AppBarLayout>
+
+        <!--PS:::!!!android:fillViewport="true" 这个属性允许 ScrollView中的组件去充满它-->
+        <android.support.v4.widget.NestedScrollView
+            android:id="@+id/nsv_meal_detail"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_gravity="fill_vertical"
+            android:fillViewport="true"
+            app:layout_behavior="@string/appbar_scrolling_view_behavior">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+
+                <!--android:background="#FFFAFA"-->
+                <android.support.design.widget.TabLayout
+                    android:id="@+id/tbl_meal_detail"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:tabIndicatorColor="@color/colorAccent"
+                    app:tabIndicatorHeight="1dp"
+                    app:tabMode="fixed"
+                    android:background="#FFFAFE"
+                    app:tabSelectedTextColor="@color/colorAccent2"
+                    app:tabTextColor="@android:color/darker_gray">
+
+                </android.support.design.widget.TabLayout>
+
+                <!-- 本来是想监听折叠，缓慢变化Tab颜色以适配标题栏颜色-->
+                <!--<android.support.design.widget.TabLayout-->
+                <!--android:id="@+id/tbl_meal_detail"-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:background="@color/colorPrimary"-->
+                <!--app:tabIndicatorColor="@color/colorAccent2"-->
+                <!--app:tabIndicatorHeight="1dp"-->
+                <!--app:tabMode="fixed"-->
+                <!--app:tabSelectedTextColor="@color/colorAccent2"-->
+                <!--app:tabTextColor="@android:color/darker_gray">-->
+
+                <!--</android.support.design.widget.TabLayout>-->
+
+                <android.support.v4.view.ViewPager
+                    android:id="@+id/vp_meal_detail"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                </android.support.v4.view.ViewPager>
+
+            </LinearLayout>
+
+        </android.support.v4.widget.NestedScrollView>
+
+        <!-- layout_anchor在appbarlayout上设置一个锚点-->
+        <!-- layout_anchorGravity这个锚点定义在appbarlayout右下角-->
+        <android.support.design.widget.FloatingActionButton
+            android:id="@+id/fab_meal_detail"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="16dp"
+            android:clickable="true"
+            android:src="@drawable/ic_favorite_border_red_200_24dp"
+            android:visibility="gone"
+            app:backgroundTint="@color/colorAccent"
+            app:layout_anchor="@id/abl_meal_detail"
+            app:layout_anchorGravity="bottom|end"
+            app:rippleColor="#ffccff" />
+    </android.support.design.widget.CoordinatorLayout>
+
+
+    <!--fab:menu_fab_label="Menu label"-->
+    <com.github.clans.fab.FloatingActionMenu
+        android:id="@+id/fam_meal_detail_thumb_and_comment"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentRight="true"
+        android:paddingBottom="15dp"
+        android:paddingRight="15dp"
+        android:visibility="gone"
+        fab:menu_backgroundColor="#ccffffff"
+        fab:menu_labels_ellipsize="end"
+        fab:menu_labels_singleLine="true">
+
+        <com.github.clans.fab.FloatingActionButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_edit"
+            fab:fab_label="评论"
+            fab:fab_size="mini" />
+
+        <com.github.clans.fab.FloatingActionButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_edit"
+            fab:fab_label="点赞"
+            fab:fab_size="mini" />
+
+        <com.github.clans.fab.FloatingActionButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_edit"
+            fab:fab_label="收藏"
+            fab:fab_size="mini" />
+
+    </com.github.clans.fab.FloatingActionMenu>
+
+</RelativeLayout>

@@ -1,0 +1,39 @@
+<resources>
+    <string name="app_name">house rent</string>
+
+    <string name="find_new_version">发现最新版本：</string>
+    <string name="version_update_des">更新内容：\n</string>
+    <string name="dialog_btn_update">更新</string>
+    <string name="dialog_btn_cancel">下次再说</string>
+    <string name="no_wifi_prompt_title">提示：</string>
+    <string name="no_wifi_prompt_message">非WiFi环境，是否流量下载？</string>
+    <string name="no_wifi_prompt_confirm">我是土豪，下载</string>
+    <string name="no_wifi_prompt_cancel">忍一手</string>
+
+    <string name="bottom_tag_canteen">食堂</string>
+    <string name="bottom_tag_after_meal">饭后</string>
+    <string name="bottom_tag_user">我的</string>
+
+    <string name="drawer_open">打开侧滑菜单</string>
+    <string name="drawer_close">关闭侧滑菜单</string>
+
+    <string name="et_hint_username">用户名</string>
+    <string name="et_hint_password">密码</string>
+    <string name="btn_text_login">登录</string>
+    <string name="btn_text_regist">注册</string>
+    <string name="tv_text_third_part_login">第三方登录</string>
+    <string name="tv_text_guess_love">猜你喜欢</string>
+    <string name="tv_text_all_meal">菜品精选</string>
+
+    <string name="flavour_no_hot">无辣</string>
+    <string name="flavour_little_hot">微辣</string>
+    <string name="flavour_very_hot">重辣</string>
+    <string name="flavour_sour">酸</string>
+    <string name="flavour_sweet">甜</string>
+    <string name="flavour_mild">清淡</string>
+    <string name="flavour_seasonal_vegetables">时蔬</string>
+    <string name="flavour_chewy">筋道</string>
+    <string name="flavour_priority_prompt">的优先顺序为</string>
+    <string name="flavour_snackbar_prompt">我们将按照该排序给您推荐菜品</string>
+    <string name="flavour_snackbar_confirm">确认</string>
+</resources>

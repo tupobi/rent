@@ -1,0 +1,191 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="cn.hhit.canteen.login.view.AtyLogin">
+
+
+    <ImageView
+        android:id="@+id/iv_login_bg"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:scaleType="centerCrop" />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:orientation="vertical">
+
+            <!--app:hintTextAppearance="@color/colorPrimaryDark"-->
+            <android.support.design.widget.TextInputLayout
+                android:id="@+id/til_username"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColorHint="@color/secondary_text"
+                app:counterEnabled="true"
+                app:counterMaxLength="16"
+                app:counterOverflowTextAppearance="@style/tilLoginCounterOverTheme"
+                app:counterTextAppearance="@style/tilLoginCounterNormalTheme"
+                app:errorEnabled="true"
+                app:errorTextAppearance="@style/tilErrorTextTheme">
+
+                <!--不用计数器可以这样设置，用计数器后超过计数背景会变-->
+                <!--android:background="@drawable/selector_bg_edit"-->
+                <!--android:paddingBottom="5dp"-->
+                <!--android:paddingTop="8dp"-->
+                <android.support.design.widget.TextInputEditText
+                    android:id="@+id/tiet_username"
+                    android:layout_width="260dp"
+                    android:layout_height="wrap_content"
+                    android:hint="@string/et_hint_username"
+                    android:inputType="textEmailAddress"
+                    android:textColor="@color/secondary_text"
+                    android:theme="@style/tietCustomerTheme" />
+
+            </android.support.design.widget.TextInputLayout>
+
+            <android.support.design.widget.TextInputLayout
+                android:id="@+id/til_password"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColorHint="@color/secondary_text"
+                app:counterEnabled="true"
+                app:counterMaxLength="16"
+                app:counterOverflowTextAppearance="@style/tilLoginCounterOverTheme"
+                app:counterTextAppearance="@style/tilLoginCounterNormalTheme"
+                app:errorEnabled="true"
+                app:errorTextAppearance="@style/tilErrorTextTheme">
+
+                <android.support.design.widget.TextInputEditText
+                    android:id="@+id/tiet_password"
+                    android:layout_width="260dp"
+                    android:layout_height="wrap_content"
+                    android:hint="@string/et_hint_password"
+                    android:inputType="textPassword"
+                    android:textColor="@color/secondary_text"
+                    android:theme="@style/tietCustomerTheme" />
+
+            </android.support.design.widget.TextInputLayout>
+
+            <RadioGroup
+                android:id="@+id/rg_user_type"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:orientation="horizontal">
+
+                <RadioButton
+                    android:id="@+id/rb_user_renter"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="租客"
+                    android:textColor="@color/secondary_text" />
+
+                <RadioButton
+                    android:id="@+id/rb_user_owner"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="房东"
+                    android:textColor="@color/secondary_text" />
+            </RadioGroup>
+
+            <Button
+                android:id="@+id/btn_normal_login"
+                android:layout_width="260dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:background="@color/colorAccent"
+                android:text="@string/btn_text_login" />
+
+            <Button
+                android:id="@+id/btn_register"
+                android:layout_width="260dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:background="@color/colorAccent"
+                android:text="@string/btn_text_regist" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="8dp"
+                android:layout_marginRight="8dp"
+                android:orientation="horizontal">
+
+                <View
+                    android:layout_width="wrap_content"
+                    android:layout_height="1dp"
+                    android:layout_gravity="center"
+                    android:layout_weight="1"
+                    android:background="@color/secondary_text" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginLeft="8dp"
+                    android:layout_marginRight="8dp"
+                    android:text="@string/tv_text_third_part_login"
+                    android:textColor="@color/secondary_text"
+                    android:textSize="14sp" />
+
+                <View
+                    android:layout_width="wrap_content"
+                    android:layout_height="1dp"
+                    android:layout_gravity="center"
+                    android:layout_weight="1"
+                    android:background="@color/secondary_text" />
+
+            </LinearLayout>
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="10dp"
+                android:layout_marginTop="3dp"
+                android:gravity="center"
+                android:orientation="horizontal">
+
+                <Button
+                    android:layout_width="60dp"
+                    android:layout_height="60dp"
+                    android:layout_marginRight="15dp"
+                    android:text="QQ" />
+
+                <Button
+                    android:layout_width="60dp"
+                    android:layout_height="60dp"
+                    android:text="微信" />
+
+                <Button
+                    android:layout_width="60dp"
+                    android:layout_height="60dp"
+                    android:layout_marginLeft="15dp"
+                    android:text="微博" />
+
+            </LinearLayout>
+        </LinearLayout>
+
+
+    </RelativeLayout>
+
+
+</FrameLayout>

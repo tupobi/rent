@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context="cn.hhit.canteen.main.view.AtyMain">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <!--<cn.hhit.canteen.diyview.NoTouchViewPager-->
+        <!--android:id="@+id/view_pager"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="match_parent"-->
+        <!--android:layout_above="@id/tab"-->
+        <!--android:layout_weight="1.0"-->
+        <!--app:layout_behavior="@string/appbar_scrolling_view_behavior" />-->
+
+        <FrameLayout
+            android:id="@+id/fl_content"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+
+            ></FrameLayout>
+
+
+        <me.majiajie.pagerbottomtabstrip.PageNavigationView
+            android:id="@+id/tab"
+            android:layout_width="match_parent"
+            android:layout_height="56.0dip"
+            android:layout_gravity="bottom"
+            android:background="@drawable/tab_background" />
+    </LinearLayout>
+
+</layout>
