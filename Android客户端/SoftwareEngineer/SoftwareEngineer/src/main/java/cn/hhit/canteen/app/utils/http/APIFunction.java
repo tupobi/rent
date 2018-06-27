@@ -11,6 +11,7 @@ import retrofit2.http.GET;
 import retrofit2.http.Multipart;
 import retrofit2.http.POST;
 import retrofit2.http.Part;
+import retrofit2.http.PartMap;
 import retrofit2.http.Path;
 import retrofit2.http.QueryMap;
 
@@ -33,6 +34,17 @@ public interface APIFunction {
             photo, @Part("userName") RequestBody userName);
 
     @GET("{user_info}")
-    Observable<User> getAvatarUrl(@Path("user_info") String path, @QueryMap Map<String,
-            String> queryOptions);
+    Observable<User> getAvatarUrl(@Path("user_info") String path, @QueryMap Map<String, String>
+            queryOptions);
+
+//    @Multipart
+//    @POST("{upload_house_info}")
+//    Observable<StringResponse> uploadHouseInfo(@Path("upload_house_info") String path, @QueryMap()
+//            Map<String, String> params, @PartMap() Map<String, RequestBody> files);
+
+    @Multipart
+    @POST("{upload_house_info}")
+    Observable<StringResponse> uploadHouseInfo(@Path("upload_house_info") String path, @PartMap()
+            Map<String, RequestBody> files);
+
 }

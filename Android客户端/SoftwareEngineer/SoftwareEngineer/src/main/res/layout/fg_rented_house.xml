@@ -1,0 +1,198 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <android.support.design.widget.AppBarLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <android.support.v7.widget.Toolbar
+                android:id="@+id/tb_canteen"
+                android:layout_width="match_parent"
+                android:layout_height="?attr/actionBarSize"
+                app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
+                app:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
+                app:title="租房系统" />
+
+        </android.support.design.widget.AppBarLayout>
+
+        <android.support.v4.widget.DrawerLayout
+            android:id="@+id/drawerlayout"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <android.support.v4.widget.SwipeRefreshLayout
+                android:id="@+id/srl_meal"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+
+                <cn.hhit.canteen.diyview.RecyclerViewNestedScrollView
+                    android:id="@+id/nsv_canteen"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:fillViewport="true">
+
+                    <LinearLayout
+                        android:id="@+id/ll_canteen"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:orientation="vertical">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:background="@color/colorPrimary"
+                            android:orientation="vertical">
+
+                            <com.youth.banner.Banner
+                                android:id="@+id/banner"
+                                android:layout_width="match_parent"
+                                android:layout_height="175dp"
+                                app:banner_default_image="@mipmap/ic_launcher"
+                                app:delay_time="4000"
+                                app:image_scale_type="center_crop"
+                                app:indicator_drawable_selected="@color/colorAccent"
+                                app:indicator_height="5dp"
+                                app:indicator_margin="3dp"
+                                app:indicator_width="5dp"
+                                app:is_auto_play="true"
+                                app:title_height="25dp"
+                                app:title_textsize="12sp">
+
+                            </com.youth.banner.Banner>
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="8dp"
+                            android:layout_marginRight="8dp"
+                            android:layout_marginTop="8dp"
+                            android:orientation="horizontal">
+
+                            <View
+                                android:layout_width="wrap_content"
+                                android:layout_height="1dp"
+                                android:layout_gravity="center"
+                                android:layout_weight="1"
+                                android:background="@color/divider" />
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center"
+                                android:layout_marginLeft="8dp"
+                                android:layout_marginRight="8dp"
+                                android:text="@string/tv_text_guess_love"
+                                android:textColor="@color/secondary_text"
+                                android:textSize="14sp" />
+
+                            <View
+                                android:layout_width="wrap_content"
+                                android:layout_height="1dp"
+                                android:layout_gravity="center"
+                                android:layout_weight="1"
+                                android:background="@color/divider" />
+
+                        </LinearLayout>
+
+                        <android.support.v7.widget.RecyclerView
+                            android:id="@+id/rv_guess_love"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content">
+
+                        </android.support.v7.widget.RecyclerView>
+
+                        <LinearLayout
+                            android:id="@+id/ll_all_meal"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="8dp"
+                            android:layout_marginRight="8dp"
+                            android:orientation="horizontal">
+
+                            <View
+                                android:layout_width="wrap_content"
+                                android:layout_height="1dp"
+                                android:layout_gravity="center"
+                                android:layout_weight="1"
+                                android:background="@color/divider" />
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center"
+                                android:layout_marginLeft="8dp"
+                                android:layout_marginRight="8dp"
+                                android:text="房源精选"
+                                android:textColor="@color/secondary_text"
+                                android:textSize="14sp" />
+
+                            <View
+                                android:layout_width="wrap_content"
+                                android:layout_height="1dp"
+                                android:layout_gravity="center"
+                                android:layout_weight="1"
+                                android:background="@color/divider" />
+                        </LinearLayout>
+
+                        <com.yyydjk.library.DropDownMenu
+                            android:id="@+id/ddm_all_meal_filter"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_marginTop="8dp"
+                            android:clickable="true"
+                            app:dddividerColor="@color/gray"
+                            app:ddmaskColor="@color/mask_color"
+                            app:ddmenuBackgroundColor="@color/white"
+                            app:ddmenuMenuHeightPercent="0.5"
+                            app:ddmenuSelectedIcon="@mipmap/drop_down_selected_icon"
+                            app:ddmenuTextSize="13sp"
+                            app:ddmenuUnselectedIcon="@mipmap/drop_down_unselected_icon"
+                            app:ddtextSelectedColor="@color/drop_down_selected"
+                            app:ddtextUnselectedColor="@color/drop_down_unselected"
+                            app:ddunderlineColor="@color/gray">
+
+                        </com.yyydjk.library.DropDownMenu>
+
+                        <LinearLayout
+                            android:id="@+id/ll_drop_down_menu_content"
+                            android:layout_width="wrap_content"
+                            android:orientation="vertical"
+                            android:layout_height="wrap_content">
+
+                            <android.support.v7.widget.RecyclerView
+                                android:id="@+id/rv_all_meal"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:nestedScrollingEnabled="false">
+
+                            </android.support.v7.widget.RecyclerView>
+                        </LinearLayout>
+
+                    </LinearLayout>
+
+                </cn.hhit.canteen.diyview.RecyclerViewNestedScrollView>
+            </android.support.v4.widget.SwipeRefreshLayout>
+
+
+            <FrameLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_gravity="left">
+
+                <include layout="@layout/fg_left_menu" />
+            </FrameLayout>
+
+        </android.support.v4.widget.DrawerLayout>
+
+    </LinearLayout>
+
+</android.support.design.widget.CoordinatorLayout>

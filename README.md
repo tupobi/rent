@@ -26,7 +26,14 @@
   | houseDescription | text     | 1024     | false    | true     | 房源详情描述                            |
   | houseLocation    | varchar  | 128      | false    | true     | 房源详细地址                            |
   | ownerPhone       | varchar  | 16       | false    | fasle    | 房东联系方式                            |
+  | pic1Url          | varchar  | 1024     | false    | true     | 第1张房源图片URL                        |
+  | pic2Url          | varchar  | 1024     | false    | false    | 第2张房源图片URL                        |
+  | pic3Url          | varchar  | 1024     | false    | false    | 第3张房源图片URL                        |
+  | pic4Url          | varchar  | 1024     | false    | false    | 第4张房源图片URL                        |
+  | pic5Url          | varchar  | 1024     | false    | false    | 第5张房源图片URL                        |
+  | pic6Url          | varchar  | 1024     | false    | false    | 第6张房源图片URL                        |
 
 ## 记一次天坑
 
-debug时如果配置混淆了，千万记得在proguard中将bean对象keep了！！！如果入坑，表现的特点就是与服务器交互完全没毛病，但是得到的数据在反射机制的作用下找不大相应的setget方法，所以是拿不到数据的。
+- debug时如果配置混淆了，千万记得在proguard中将bean对象keep了！！！如果入坑，表现的特点就是与服务器交互完全没毛病，但是得到的数据在反射机制的作用下找不大相应的setget方法，所以是拿不到数据的。
+- 鲁班压缩如果异步的话，还没压缩完，没得到数据，而结果在主线程内，那么主线程可能先执行了，数据为空。

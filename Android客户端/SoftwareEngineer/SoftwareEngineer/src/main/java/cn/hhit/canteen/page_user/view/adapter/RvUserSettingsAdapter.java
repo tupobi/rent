@@ -42,7 +42,7 @@ public class RvUserSettingsAdapter extends RecyclerView.Adapter<RvUserSettingsAd
         if (position == 1) {
             Glide.with(mContext).load(R.drawable.ic_history_selected).into(holder
                     .mIvUserSettingMyCollect);
-            holder.mTvUserSettingMyCollect.setText("我的口味");
+            holder.mTvUserSettingMyCollect.setText("我的偏好");
         }
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override

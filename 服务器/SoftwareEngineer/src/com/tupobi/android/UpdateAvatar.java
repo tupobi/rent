@@ -21,8 +21,8 @@ import org.apache.commons.fileupload.servlet.ServletFileUpload;
 import org.apache.commons.io.FilenameUtils;
 
 import com.tupobi.bean.StringResponse;
-import com.tupobi.biz.IUserBiz;
-import com.tupobi.biz.UserBizImpl;
+import com.tupobi.biz.user_biz.IUserBiz;
+import com.tupobi.biz.user_biz.UserBizImpl;
 import com.tupobi.utils.JsonUtil;
 
 public class UpdateAvatar extends HttpServlet {

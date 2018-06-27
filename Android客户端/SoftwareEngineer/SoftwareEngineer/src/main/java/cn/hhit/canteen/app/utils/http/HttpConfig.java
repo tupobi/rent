@@ -16,21 +16,16 @@ public class HttpConfig {
 
     public static int HTTP_TIME = 6000;
 
-    public static String VERSION_CHECK_BASE_URL = "http://120.78.191.148/AppVersionControler/";
+    public static final String VERSION_CHECK_BASE_URL =
+            "http://120.78.191.148/AppVersionControler/";
+    public static final String PATH = "service";
+    public static final String GET_LATEST_VERSION = "versioncheck";
+    public static final String BASE_URL = "http://192.168.43.42:8080/SoftwareEngineer/servlet/";
+    public static final String PIC_BASE_URL = "http://192.168.43.42:8080/";
+    public static final String REGISTER = "Regist";
+    public static final String LOGIN = "Login";
+    public static final String UPLOAD_AVATAR = "UpdateAvatar";
+    public static final String GET_USER_INFO = "GetUserInfo";
+    public static final String UPLOAD_HOUSE_INFO = "UploadHouse";
 
-    public static String PATH = "service";
-
-    public static String GET_LATEST_VERSION = "versioncheck";
-
-    public static String BASE_URL = "http://192.168.43.42:8080/SoftwareEngineer/servlet/";
-
-    public static String PIC_BASE_URL = "http://192.168.43.42:8080/";
-
-    public static String REGISTER = "Regist";
-
-    public static String LOGIN = "Login";
-
-    public static String UPLOAD_AVATAR = "UpdateAvatar";
-
-    public static String GET_USER_INFO = "GetUserInfo";
 }

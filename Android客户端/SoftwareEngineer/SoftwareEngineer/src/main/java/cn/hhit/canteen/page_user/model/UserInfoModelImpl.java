@@ -24,7 +24,8 @@ public class UserInfoModelImpl implements IUserInfoModel {
             uploadAvatarCallback) {
         File avatar = new File(avatarPath);
         RequestBody photoRequestBody = RequestBody.create(MediaType.parse("image/jpg"), avatar);
-        MultipartBody.Part photo = MultipartBody.Part.createFormData("photos", "icon.png",
+        //photos是字段名
+        MultipartBody.Part photo = MultipartBody.Part.createFormData("photos", "pic.jpg",
                 photoRequestBody);
         RetrofitFactory.getInstence().API().updateAvatar(HttpConfig.UPLOAD_AVATAR, photo,
                 RequestBody.create(null, userName)).subscribeOn(Schedulers.io()).observeOn

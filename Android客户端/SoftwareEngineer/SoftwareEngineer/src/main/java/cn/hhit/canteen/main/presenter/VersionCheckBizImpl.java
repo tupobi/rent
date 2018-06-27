@@ -15,6 +15,7 @@ import java.util.List;
 
 import cn.hhit.canteen.app.CanteenApplication;
 import cn.hhit.canteen.app.utils.LogUtil;
+import cn.hhit.canteen.app.utils.ToastUtil;
 import cn.hhit.canteen.app.utils.network.NetworkUtil;
 import cn.hhit.canteen.main.model.bean.AppVersion;
 import cn.hhit.canteen.main.model.dao.IVersionCheckModel;
@@ -72,6 +73,7 @@ public class VersionCheckBizImpl implements IVersionCheckBiz {
                     public void onFailed() {
                         //可能是网络错误，服务器异常等，但用户可以不需要知道
                         LogUtil.e("no result");
+                        ToastUtil.showShort(mContext, "服务器异常");
                     }
                 }
         );

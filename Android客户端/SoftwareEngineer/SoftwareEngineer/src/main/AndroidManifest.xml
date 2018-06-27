@@ -49,11 +49,13 @@
 
         <activity
             android:name=".login.view.AtyPreference"
-            android:theme="@style/toolbarTheme"></activity>
+            android:theme="@style/toolbarTheme" />
         <activity
             android:name=".meal_detail.view.AtyMealDetail"
-            android:theme="@style/toolbarTheme"></activity>
-        <activity android:name=".page_user.view.AtyUploadViewAvatar"></activity>
+            android:theme="@style/toolbarTheme" />
+        <activity android:name=".page_user.view.AtyUploadViewAvatar" />
+        <activity android:name=".house_manage.view.AtyHouseManage" />
+        <activity android:name=".house_manage.view.AtyAddHouse"></activity>
     </application>
 
 </manifest>

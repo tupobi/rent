@@ -9,10 +9,10 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.tupobi.bean.User;
-import com.tupobi.biz.IUserBiz;
-import com.tupobi.biz.UserBizImpl;
-import com.tupobi.dao.IUserDao;
-import com.tupobi.dao.UserDaoImpl;
+import com.tupobi.biz.user_biz.IUserBiz;
+import com.tupobi.biz.user_biz.UserBizImpl;
+import com.tupobi.dao.user_dao.IUserDao;
+import com.tupobi.dao.user_dao.UserDaoImpl;
 import com.tupobi.utils.JsonUtil;
 
 public class GetUserInfo extends HttpServlet {

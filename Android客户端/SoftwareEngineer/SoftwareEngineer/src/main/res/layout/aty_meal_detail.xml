@@ -127,7 +127,7 @@
             android:layout_height="wrap_content"
             android:layout_margin="16dp"
             android:clickable="true"
-            android:src="@drawable/ic_favorite_border_red_200_24dp"
+            android:src="@drawable/ic_favorite_red_400_24dp"
             android:visibility="gone"
             app:backgroundTint="@color/colorAccent"
             app:layout_anchor="@id/abl_meal_detail"
@@ -137,6 +137,7 @@
 
 
     <!--fab:menu_fab_label="Menu label"-->
+    <!--fab:menu_backgroundColor="#ccffffff"-->
     <com.github.clans.fab.FloatingActionMenu
         android:id="@+id/fam_meal_detail_thumb_and_comment"
         android:layout_width="match_parent"
@@ -146,7 +147,7 @@
         android:paddingBottom="15dp"
         android:paddingRight="15dp"
         android:visibility="gone"
-        fab:menu_backgroundColor="#ccffffff"
+        fab:menu_backgroundColor="#A5fffff9"
         fab:menu_labels_ellipsize="end"
         fab:menu_labels_singleLine="true">
 

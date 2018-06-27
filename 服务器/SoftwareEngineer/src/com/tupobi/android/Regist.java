@@ -9,8 +9,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.tupobi.bean.StringResponse;
-import com.tupobi.biz.IUserBiz;
-import com.tupobi.biz.UserBizImpl;
+import com.tupobi.biz.user_biz.IUserBiz;
+import com.tupobi.biz.user_biz.UserBizImpl;
 import com.tupobi.utils.JsonUtil;
 
 public class Regist extends HttpServlet {
