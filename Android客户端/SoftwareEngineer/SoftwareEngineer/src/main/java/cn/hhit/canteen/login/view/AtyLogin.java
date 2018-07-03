@@ -1,5 +1,7 @@
 package cn.hhit.canteen.login.view;
 
+import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.TextInputEditText;
 import android.support.design.widget.TextInputLayout;
@@ -11,10 +13,13 @@ import android.widget.RadioGroup;
 
 import com.bumptech.glide.Glide;
 
+import java.text.SimpleDateFormat;
+
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import cn.hhit.canteen.R;
+import cn.hhit.canteen.app.utils.Config;
 import cn.hhit.canteen.app.utils.SpUtils;
 import cn.hhit.canteen.login.presenter.ILoginPresenter;
 import cn.hhit.canteen.login.presenter.LoginPresenterImpl;
@@ -43,11 +48,15 @@ public class AtyLogin extends AppCompatActivity implements ILoginView {
 
     private ILoginPresenter mILoginPresenter;
 
+    public static void actionStart(Context c) {
+        c.startActivity(new Intent(c, AtyLogin.class));
+    }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        if (!"null".equals(SpUtils.getInstance().getString(AtyLogin.SESSION_USERNAME, "null"))) {
+        if (!SpUtils.getInstance().getString(AtyLogin.SESSION_USERNAME, "").isEmpty()) {
             //已登录
             loginSuccess();
             finish();
@@ -60,7 +69,7 @@ public class AtyLogin extends AppCompatActivity implements ILoginView {
     }
 
     private void initView() {
-        Glide.with(AtyLogin.this).load(R.drawable.login_bg_1).into(mIvLoginBg);
+        Glide.with(AtyLogin.this).load(R.drawable.login_bg_3).into(mIvLoginBg);
         mRgUserType.check(R.id.rb_user_renter);
     }
 

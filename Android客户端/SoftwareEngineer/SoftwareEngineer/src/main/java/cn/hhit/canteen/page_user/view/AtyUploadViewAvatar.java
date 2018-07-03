@@ -174,5 +174,4 @@ public class AtyUploadViewAvatar extends AppCompatActivity implements IUserInfoU
         MessageEvent messageEvent = new MessageEvent(UPDATE_AVATAR);
         EventBus.getDefault().post(messageEvent);
     }
-
 }

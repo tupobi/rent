@@ -164,7 +164,8 @@
     </style>
 
 
-    <style name="toolbar_theme" parent="@style/ThemeOverlay.AppCompat.Dark.ActionBar">
+    <style name="toolbar_theme" parent="Theme.AppCompat.Light">
         <item name="colorControlNormal">@color/white</item>
+        <item name="colorButtonNormal">@android:color/white</item>
     </style>
 </resources>

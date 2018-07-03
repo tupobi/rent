@@ -6,4 +6,6 @@ package cn.hhit.canteen.page_rentedhouse.view;
 
 public interface IRentedHouseView {
     void startAtyHouseManage();
+
+    void setData();
 }

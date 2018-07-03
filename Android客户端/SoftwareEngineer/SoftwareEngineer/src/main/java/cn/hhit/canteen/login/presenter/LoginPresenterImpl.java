@@ -29,8 +29,8 @@ public class LoginPresenterImpl implements ILoginPresenter {
 
     @Override
     public void register(final String userName, String userPassword, int userType) {
-        if (userName.isEmpty() || userPassword.isEmpty()) {
-            ToastUtil.showShort(mContext, "账号密码不能为空！");
+        if (userName.isEmpty() || userPassword.isEmpty() || userName.length() > 15) {
+            ToastUtil.showShort(mContext, "无效的输入！");
             return;
         }
         mILoginModel.register(userName, userPassword, userType, new ILoginModel.RegisterCallback() {
@@ -60,8 +60,8 @@ public class LoginPresenterImpl implements ILoginPresenter {
 
     @Override
     public void login(final String userName, String userPassword, int userType) {
-        if (userName.isEmpty() || userPassword.isEmpty()) {
-            ToastUtil.showShort(mContext, "账号密码不能为空！");
+        if (userName.isEmpty() || userPassword.isEmpty() || userName.length() > 15) {
+            ToastUtil.showShort(mContext, "无效的输入");
             return;
         }
         mILoginModel.login(userName, userPassword, userType, new ILoginModel.LoginCallback() {

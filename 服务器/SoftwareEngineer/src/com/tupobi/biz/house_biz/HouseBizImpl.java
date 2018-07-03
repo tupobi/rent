@@ -1,6 +1,7 @@
 package com.tupobi.biz.house_biz;
 
 import java.sql.SQLException;
+import java.util.List;
 
 import com.tupobi.bean.House;
 import com.tupobi.dao.house_dao.HouseDaoImpl;
@@ -23,6 +24,30 @@ public class HouseBizImpl implements IHouseBiz {
 			e.printStackTrace();
 		}
 		return res == 1;
+	}
+
+	@Override
+	public List<House> getAllHouseInfo() {
+		List<House> houses = null;
+		try {
+			houses = iHouseDao.selectAllHouseInfo();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return houses;
+	}
+
+	@Override
+	public List<House> getHouseInfoByUserName(String userName) {
+		List<House> houses = null;
+		try {
+			houses = iHouseDao.selectHouseByUserName(userName);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return houses;
 	}
 
 }

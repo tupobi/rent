@@ -15,6 +15,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -34,6 +35,7 @@ import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
 import butterknife.Unbinder;
 import cn.hhit.canteen.R;
 import cn.hhit.canteen.app.utils.LogUtil;
@@ -72,6 +74,8 @@ public class FgUser extends Fragment implements IUserView {
     TextView mTvNickname;
 
     private final Context mContext;
+    @BindView(R.id.btn_logout)
+    Button mBtnLogout;
     private List<LocalMedia> mLocalMediaList = new ArrayList<>();
     private IUserPresenter mIUserPresenter;
 
@@ -224,5 +228,12 @@ public class FgUser extends Fragment implements IUserView {
                     .into(mCivAvatar);
         }
         mTvNickname.setText(user.getUserName());
+    }
+
+    @OnClick(R.id.btn_logout)
+    public void onViewClicked() {
+        AtyLogin.actionStart(mContext);
+        SpUtils.getInstance().save(AtyLogin.SESSION_USERNAME, "");
+        getActivity().finish();
     }
 }

@@ -97,6 +97,7 @@
 -keep class cn.hhit.canteen.app.utils.bean.**{*;}
 -keep class cn.hhit.canteen.page_user.model.bean.**{*;}
 -keep class cn.hhit.canteen.house_manage.model.bean.**{*;}
+-keep class cn.hhit.canteen.meal_detail.model.bean.**{*;}
 #......
 
 #-----------处理第三方依赖库---------

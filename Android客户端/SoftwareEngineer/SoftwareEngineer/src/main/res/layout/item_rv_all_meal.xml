@@ -15,7 +15,7 @@
         android:layout_marginTop="3dp"
         android:foreground="?attr/selectableItemBackgroundBorderless"
         app:cardCornerRadius="8dp"
-        app:contentPadding="8dp">
+        app:contentPadding="6dp">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -36,14 +36,16 @@
                 android:orientation="vertical">
 
                 <TextView
+                    android:id="@+id/tv_house_name"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="8dp"
+                    android:layout_marginTop="3dp"
                     android:text="出租房名字"
                     android:textColor="@color/primary_text"
                     android:textSize="16sp" />
 
                 <TextView
+                    android:id="@+id/tv_house_city_area_type"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="8dp"
@@ -78,6 +80,7 @@
                         </View>
 
                         <TextView
+                            android:id="@+id/tv_house_origin_price"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_centerInParent="true"
@@ -88,9 +91,10 @@
                     </RelativeLayout>
 
                     <TextView
+                        android:id="@+id/tv_house_now_price"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="￥3000"
+                        android:text="￥30000"
                         android:textColor="#FF4500"
                         android:textSize="14sp" />
                 </LinearLayout>
@@ -114,6 +118,7 @@
                             android:src="@drawable/ic_thumb_up_red_200_24dp" />
 
                         <TextView
+                            android:id="@+id/tv_thumb"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="16"
@@ -134,6 +139,7 @@
                             android:src="@drawable/ic_favorite_border_red_200_24dp" />
 
                         <TextView
+                            android:id="@+id/tv_collect"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="32"

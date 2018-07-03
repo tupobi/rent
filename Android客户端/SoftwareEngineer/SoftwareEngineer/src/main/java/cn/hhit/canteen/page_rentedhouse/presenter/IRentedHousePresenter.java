@@ -6,4 +6,6 @@ package cn.hhit.canteen.page_rentedhouse.presenter;
 
 public interface IRentedHousePresenter {
     void isHouseOwner(String userName);
+
+    void getAllHousesInfo();
 }

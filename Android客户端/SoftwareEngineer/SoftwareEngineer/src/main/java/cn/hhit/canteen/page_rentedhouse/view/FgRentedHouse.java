@@ -39,6 +39,8 @@ import com.yyydjk.library.DropDownMenu;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Timer;
+import java.util.TimerTask;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -49,7 +51,10 @@ import cn.hhit.canteen.app.utils.DensityUtil;
 import cn.hhit.canteen.app.utils.LogUtil;
 import cn.hhit.canteen.app.utils.SpUtils;
 import cn.hhit.canteen.app.utils.ToastUtil;
+import cn.hhit.canteen.app.utils.http.HttpConfig;
+import cn.hhit.canteen.app.utils.network.GsonUtil;
 import cn.hhit.canteen.diyview.RecyclerViewNestedScrollView;
+import cn.hhit.canteen.house_manage.model.bean.House;
 import cn.hhit.canteen.house_manage.view.AtyHouseManage;
 import cn.hhit.canteen.login.view.AtyLogin;
 import cn.hhit.canteen.meal_detail.view.AtyMealDetail;
@@ -94,9 +99,11 @@ public class FgRentedHouse extends Fragment implements IRentedHouseView {
     @BindView(R.id.ll_menu_item_house_owner)
     LinearLayout mLlMenuItemHouseOwner;
 
+    public static final String HOUSE_BUNDLE_KEY = "house";
+
     private View mRootView;//缓存Fragment view
     private Context mContext;
-    private String headers[] = {"户型", "月租", "方式", "时长"};
+    private String headers[] = {"户型", "方式", "时长", "月租"};
     private String houseType[] = {"不限", "上下铺", "一室", "两室", "三室", "四室", "四室以上"};
     private String way[] = {"不限", "整套出粗", "单间出租"};
     private String duration[] = {"不限", "一个月", "三个月", "半年", "一年", "两年", "三年", "三年以上"};
@@ -115,16 +122,19 @@ public class FgRentedHouse extends Fragment implements IRentedHouseView {
         View rootView = inflater.inflate(R.layout.fg_rented_house, container, false);
         unbinder = ButterKnife.bind(this, rootView);
         mIRentedHousePresenter = new RentedHousePresenterImpl(this, mContext);
+
+        initDropDownMenuAllMealFilter();
         initToolbar();
         initSwipeRefreshLayout();
         initDrawerlayout();
+        mIRentedHousePresenter.getAllHousesInfo();
+        return rootView;
+    }
+
+    private void initView() {
         initBanner();
         initRvGuessLove();
         initRvAllMeal();
-        initDropDownMenuAllMealFilter();
-
-        return rootView;
-//        return mRootView;
     }
 
     private void initDropDownMenuAllMealFilter() {
@@ -300,6 +310,7 @@ public class FgRentedHouse extends Fragment implements IRentedHouseView {
 
         LogUtil.e("popViews.size（） == " + popupViews.size() + ", headers.length == " + headers
                 .length);
+
         mDdmAllMealFilter.setDropDownMenu(Arrays.asList(headers), popupViews, mRvAllMeal);
         mRvAllMeal.setFocusable(true);
     }
@@ -315,11 +326,16 @@ public class FgRentedHouse extends Fragment implements IRentedHouseView {
         mSrlMeal.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
-                new Handler().postDelayed(new Runnable() {
+                mIRentedHousePresenter.getAllHousesInfo();
+                new Timer().schedule(new TimerTask() {
                     @Override
                     public void run() {
-                        //do refresh data..
-                        mSrlMeal.setRefreshing(false);
+                        getActivity().runOnUiThread(new Runnable() {
+                            @Override
+                            public void run() {
+                                mSrlMeal.setRefreshing(false);
+                            }
+                        });
                     }
                 }, 1500);
             }
@@ -383,43 +399,48 @@ public class FgRentedHouse extends Fragment implements IRentedHouseView {
     private void initRvAllMeal() {
 //        mRvAllMeal.setLayoutManager(new CustomLinearLayoutManager(mContext,
 //                LinearLayoutManager.VERTICAL, false));
+        final List<House> houses = GsonUtil.jsonList2BeanList(SpUtils.getInstance().getString
+                (RentedHousePresenterImpl.CACHED_HOUSES_INFO, ""), House.class);
+        if (houses == null) {
+            return;
+        }
         mRvAllMeal.setLayoutManager(new LinearLayoutManager(mContext));
-        List<Integer> rvAllMealImgs = new ArrayList<>();
-        rvAllMealImgs.add(R.drawable.meal1);
-        rvAllMealImgs.add(R.drawable.meal2);
-        rvAllMealImgs.add(R.drawable.meal3);
-        rvAllMealImgs.add(R.drawable.meal4);
-        rvAllMealImgs.add(R.drawable.meal1);
-        rvAllMealImgs.add(R.drawable.meal2);
-        rvAllMealImgs.add(R.drawable.meal3);
-        rvAllMealImgs.add(R.drawable.meal4);
-        rvAllMealImgs.add(R.drawable.meal1);
-        rvAllMealImgs.add(R.drawable.meal2);
-        rvAllMealImgs.add(R.drawable.meal3);
-        rvAllMealImgs.add(R.drawable.meal4);
-        RvAllMealAdapter rvAllMealAdapter = new RvAllMealAdapter(mContext, rvAllMealImgs);
+//        List<String> rvAllMealImgs = new ArrayList<>();
+//        for (int i = 0; i < houses.size(); i++) {
+//            rvAllMealImgs.add(HttpConfig.PIC_BASE_URL + houses.get(i).getPic1Url());
+//        }
+        RvAllMealAdapter rvAllMealAdapter = new RvAllMealAdapter(mContext, houses);
 
         //设置item点击事件监听
         mRvAllMeal.setAdapter(rvAllMealAdapter);
         rvAllMealAdapter.setOnRvItemClickListener(new RvAllMealAdapter.OnRvItemClickListener() {
             @Override
             public void onItemClickListener(View itemView, int position) {
-                TransitionsHeleper.startActivity(getActivity(), new Intent(mContext,
-                        AtyMealDetail.class), itemView.findViewById(R.id.iv_all_meal), R.drawable
-                        .meal1);
+                Intent intent = new Intent(mContext, AtyMealDetail.class);
+                Bundle bundle = new Bundle();
+                bundle.putSerializable(FgRentedHouse.HOUSE_BUNDLE_KEY, houses.get(position));
+                intent.putExtras(bundle);
+                TransitionsHeleper.startActivity(getActivity(), intent, itemView.findViewById(R
+                        .id.iv_all_meal), HttpConfig.PIC_BASE_URL + houses.get(position)
+                        .getPic1Url());
             }
         });
     }
 
     private void initRvGuessLove() {
+        final List<House> houses = GsonUtil.jsonList2BeanList(SpUtils.getInstance().getString
+                (RentedHousePresenterImpl.CACHED_HOUSES_INFO, ""), House.class);
+        if (houses == null) {
+            return;
+        }
+
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(mContext,
                 LinearLayoutManager.HORIZONTAL, false);
         mRvGuessLove.setLayoutManager(linearLayoutManager);
-        List<Integer> rvGuessLoveImgs = new ArrayList<>();
-        rvGuessLoveImgs.add(R.drawable.meal1);
-        rvGuessLoveImgs.add(R.drawable.meal2);
-        rvGuessLoveImgs.add(R.drawable.meal3);
-        rvGuessLoveImgs.add(R.drawable.meal4);
+        List<String> rvGuessLoveImgs = new ArrayList<>();
+        for (int i = 0; i < houses.size(); i++) {
+            rvGuessLoveImgs.add(houses.get(i).getPic1Url());
+        }
         RvGuessLoveAdapter rvGuessLoveAdapter = new RvGuessLoveAdapter(rvGuessLoveImgs, mContext);
         mRvGuessLove.setAdapter(rvGuessLoveAdapter);
         linearLayoutManager.scrollToPositionWithOffset(1, DensityUtil.dip2px(mContext, 87));
@@ -428,25 +449,50 @@ public class FgRentedHouse extends Fragment implements IRentedHouseView {
         rvGuessLoveAdapter.setOnRvItemClickListener(new RvGuessLoveAdapter.OnRvItemClickListener() {
             @Override
             public void onItemClickListener(View itemView, int position) {
-                TransitionsHeleper.startActivity(getActivity(), new Intent(mContext,
-                        AtyMealDetail.class), itemView.findViewById(R.id.iv_guesslove_meal), R
-                        .drawable.meal2);
+                Intent intent = new Intent(mContext, AtyMealDetail.class);
+                Bundle bundle = new Bundle();
+                bundle.putSerializable(FgRentedHouse.HOUSE_BUNDLE_KEY, houses.get(position));
+                intent.putExtras(bundle);
+                TransitionsHeleper.startActivity(getActivity(), intent, itemView.findViewById(R
+                        .id.iv_guesslove_meal), HttpConfig.PIC_BASE_URL + houses.get(position)
+                        .getPic1Url());
             }
         });
     }
 
     private void initBanner() {
-        List<Integer> bannerImgs = new ArrayList<>();
-        bannerImgs.add(R.drawable.meal1);
-        bannerImgs.add(R.drawable.meal2);
-        bannerImgs.add(R.drawable.meal3);
-        bannerImgs.add(R.drawable.meal4);
+        final List<House> houses = GsonUtil.jsonList2BeanList(SpUtils.getInstance().getString
+                (RentedHousePresenterImpl.CACHED_HOUSES_INFO, ""), House.class);
+        if (houses == null) {
+            return;
+        }
+        LogUtil.e(houses.toString());
 
+//        List<Integer> bannerImgs = new ArrayList<>();
+//        bannerImgs.add(R.drawable.meal1);
+//        bannerImgs.add(R.drawable.meal2);
+//        bannerImgs.add(R.drawable.meal3);
+//        bannerImgs.add(R.drawable.meal4);
+
+        final List<String> bannerImgs = new ArrayList<>();
         List<String> titles = new ArrayList<>();
-        titles.add("三室一厅，特价出租啦！");
-        titles.add("情侣入住，房租减半，水电全免！");
-        titles.add("这是你从没有体验过的全新装修房~");
-        titles.add("限时特价，过了这个村就没有这个房啦！");
+        if (houses.size() < 5) {
+            for (int i = houses.size() - 1; i >= 0; i--) {
+                bannerImgs.add(HttpConfig.PIC_BASE_URL + houses.get(i).getPic1Url());
+                titles.add(houses.get(i).getHouseTitle());
+            }
+        } else {
+            for (int i = houses.size() - 1; i >= houses.size() - 5; i--) {
+                bannerImgs.add(HttpConfig.PIC_BASE_URL + houses.get(i).getPic1Url());
+                titles.add(houses.get(i).getHouseTitle());
+            }
+        }
+
+//        List<String> titles = new ArrayList<>();
+//        titles.add("三室一厅，特价出租啦！");
+//        titles.add("情侣入住，房租减半，水电全免！");
+//        titles.add("这是你从没有体验过的全新装修房~");
+//        titles.add("限时特价，过了这个村就没有这个房啦！");
 
         mBanner.setBannerAnimation(Transformer.RotateDown);
         mBanner.setBannerStyle(BannerConfig.CIRCLE_INDICATOR_TITLE_INSIDE);
@@ -461,12 +507,22 @@ public class FgRentedHouse extends Fragment implements IRentedHouseView {
             }
         });
 
+
         mBanner.setOnBannerListener(new OnBannerListener() {
             @Override
             public void OnBannerClick(int position) {
 //                AtyMealDetail.actionStart(mContext);
-                TransitionsHeleper.startActivity(getActivity(), new Intent(mContext,
-                        AtyMealDetail.class), mBanner, R.drawable.meal1);
+                Intent intent = new Intent(mContext, AtyMealDetail.class);
+                Bundle bundle = new Bundle();
+                for (int i = 0; i < houses.size(); i++) {
+                    if ((HttpConfig.PIC_BASE_URL + houses.get(i).getPic1Url()).equals(bannerImgs
+                            .get(position))) {
+                        bundle.putSerializable(FgRentedHouse.HOUSE_BUNDLE_KEY, houses.get(i));
+                    }
+                }
+                intent.putExtras(bundle);
+                TransitionsHeleper.startActivity(getActivity(), intent, mBanner, bannerImgs.get
+                        (position));
             }
         });
         mBanner.start();
@@ -518,5 +574,10 @@ public class FgRentedHouse extends Fragment implements IRentedHouseView {
     @Override
     public void startAtyHouseManage() {
         AtyHouseManage.actionStart(mContext);
+    }
+
+    @Override
+    public void setData() {
+        initView();
     }
 }

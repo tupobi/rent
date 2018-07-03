@@ -119,7 +119,7 @@ public class AtyPreference extends AppCompatActivity implements OnStartDragListe
     }
 
     private void showConfirmFlavourSnackbar() {
-        Snackbar.make(mBtnConfirmFlavour, getString(R.string.flavour_snackbar_prompt), Snackbar.LENGTH_SHORT)
+        Snackbar.make(mBtnConfirmFlavour, "我们将按照偏好给您推荐住房", Snackbar.LENGTH_SHORT)
                 .setAction(getString(R.string.flavour_snackbar_confirm), new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {

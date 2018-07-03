@@ -29,6 +29,7 @@
         android:textSize="24.0sp" />
 
     <Button
+        android:id="@+id/btn_logout"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="10.0dip"

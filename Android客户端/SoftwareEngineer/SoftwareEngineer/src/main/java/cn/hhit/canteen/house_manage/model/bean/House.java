@@ -1,6 +1,8 @@
 package cn.hhit.canteen.house_manage.model.bean;
 
-public class House {
+import java.io.Serializable;
+
+public class House implements Serializable{
 	private String userName;
 	private String houseName;
 	private String houseCity;

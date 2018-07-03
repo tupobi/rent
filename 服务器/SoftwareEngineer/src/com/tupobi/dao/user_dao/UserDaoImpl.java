@@ -32,7 +32,11 @@ public class UserDaoImpl implements IUserDao {
 			// 1±Ì æ¥Ê‘⁄
 			return true;
 		}
-
+	}
+	
+	public int deleteUserByUserName(String userName) throws SQLException{
+		QueryRunner qr = new QueryRunner(C3P0Util.getDataSource());
+		return qr.update("delete from user where userName = ?", userName);
 	}
 
 	@Override

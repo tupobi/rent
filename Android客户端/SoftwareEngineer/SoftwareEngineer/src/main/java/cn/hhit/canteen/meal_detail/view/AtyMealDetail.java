@@ -1,9 +1,12 @@
 package cn.hhit.canteen.meal_detail.view;
 
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.BitmapFactory;
 import android.graphics.Color;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.design.widget.AppBarLayout;
 import android.support.design.widget.CollapsingToolbarLayout;
@@ -20,7 +23,9 @@ import android.support.v7.widget.Toolbar;
 import android.util.DisplayMetrics;
 import android.view.MotionEvent;
 import android.view.View;
+import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.Space;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
@@ -36,20 +41,28 @@ import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
 import cn.hhit.canteen.R;
 import cn.hhit.canteen.app.utils.Config;
 import cn.hhit.canteen.app.utils.LogUtil;
+import cn.hhit.canteen.app.utils.SpUtils;
+import cn.hhit.canteen.app.utils.ToastUtil;
+import cn.hhit.canteen.app.utils.http.HttpConfig;
+import cn.hhit.canteen.house_manage.model.bean.House;
+import cn.hhit.canteen.login.view.AtyLogin;
+import cn.hhit.canteen.meal_detail.presenter.IMealDetailPresenter;
+import cn.hhit.canteen.meal_detail.presenter.MealDetailPresenterImpl;
 import cn.hhit.canteen.meal_detail.view.adapter.TabLayoutAdapter;
 import cn.hhit.canteen.meal_detail.view.listener.AppBarStateChangeListener;
 import cn.hhit.canteen.meal_detail.view.meal_detail_tabs.TabFgMealComment;
 import cn.hhit.canteen.meal_detail.view.meal_detail_tabs.TabFgMealDetail;
+import cn.hhit.canteen.page_rentedhouse.view.FgRentedHouse;
 import immortalz.me.library.TransitionsHeleper;
 import immortalz.me.library.bean.InfoBean;
 import immortalz.me.library.listener.TransitionListener;
 import immortalz.me.library.method.InflateShowMethod;
 
-public class AtyMealDetail extends AppCompatActivity {
-
+public class AtyMealDetail extends AppCompatActivity implements IMealDetailView{
 
     @BindView(R.id.tb_meal_detail)
     Toolbar mTbMealDetail;
@@ -71,11 +84,19 @@ public class AtyMealDetail extends AppCompatActivity {
     NestedScrollView mNsvMealDetail;
     @BindView(R.id.cl_meal_detail)
     CoordinatorLayout mClMealDetail;
+    @BindView(R.id.fab_comment)
+    com.github.clans.fab.FloatingActionButton mFabComment;
+    @BindView(R.id.fab_thumb)
+    com.github.clans.fab.FloatingActionButton mFabThumb;
+    @BindView(R.id.fab_rent)
+    com.github.clans.fab.FloatingActionButton mFabRent;
 
     private boolean mIsFirstCollasping = true;
     private int mAppBarCollaspingState = 0;
     private String[] mTitles = new String[]{"详情", "热评"};
     private List<Fragment> mTabFragments = new ArrayList<>();
+    private House mHouse;
+    private IMealDetailPresenter mIMealDetailPresenter;
 
 
     public static void actionStart(Context context) {
@@ -87,6 +108,15 @@ public class AtyMealDetail extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.aty_meal_detail);
         ButterKnife.bind(this);
+        mIMealDetailPresenter = new MealDetailPresenterImpl(this, this);
+
+        House house = (House) getIntent().getSerializableExtra(FgRentedHouse.HOUSE_BUNDLE_KEY);
+        mHouse = house;
+        LogUtil.e("mHouse == " + mHouse.toString());
+        LogUtil.e("houseName == " + mHouse.getHouseName());
+
+        mIMealDetailPresenter.addHistory(SpUtils.getInstance().getString(AtyLogin
+                .SESSION_USERNAME, ""), mHouse.getHouseName());
 
         initToolbarMealDetail();
         initAnimation();
@@ -106,8 +136,8 @@ public class AtyMealDetail extends AppCompatActivity {
     }
 
     private void initViewPagerMealDetail() {
-        mTabFragments.add(new TabFgMealDetail());
-        mTabFragments.add(new TabFgMealComment());
+        mTabFragments.add(new TabFgMealDetail(mHouse));
+        mTabFragments.add(new TabFgMealComment(mHouse));
 
         TabLayoutAdapter tabAdapter = new TabLayoutAdapter(AtyMealDetail.this,
                 getSupportFragmentManager(), mTabFragments, mTitles);
@@ -234,16 +264,30 @@ public class AtyMealDetail extends AppCompatActivity {
     }
 
     private void initTopBanner() {
-        List<Integer> bannerImgs = new ArrayList<>();
-        bannerImgs.add(R.drawable.meal1);
-        bannerImgs.add(R.drawable.meal2);
-        bannerImgs.add(R.drawable.meal3);
-        bannerImgs.add(R.drawable.meal4);
+        final List<String> imgUrls = new ArrayList<>();
+        if (mHouse.getPic1Url() != null && !mHouse.getPic1Url().isEmpty()) {
+            imgUrls.add(HttpConfig.PIC_BASE_URL + mHouse.getPic1Url());
+        }
+        if (mHouse.getPic2Url() != null && !mHouse.getPic2Url().isEmpty()) {
+            imgUrls.add(HttpConfig.PIC_BASE_URL + mHouse.getPic2Url());
+        }
+        if (mHouse.getPic3Url() != null && !mHouse.getPic3Url().isEmpty()) {
+            imgUrls.add(HttpConfig.PIC_BASE_URL + mHouse.getPic3Url());
+        }
+        if (mHouse.getPic4Url() != null && !mHouse.getPic4Url().isEmpty()) {
+            imgUrls.add(HttpConfig.PIC_BASE_URL + mHouse.getPic4Url());
+        }
+        if (mHouse.getPic5Url() != null && !mHouse.getPic5Url().isEmpty()) {
+            imgUrls.add(HttpConfig.PIC_BASE_URL + mHouse.getPic5Url());
+        }
+        if (mHouse.getPic6Url() != null && !mHouse.getPic6Url().isEmpty()) {
+            imgUrls.add(HttpConfig.PIC_BASE_URL + mHouse.getPic6Url());
+        }
 
         mBannerMealDetailTopPicture.setBannerAnimation(Transformer.ZoomOut);
         mBannerMealDetailTopPicture.setBannerStyle(BannerConfig.CIRCLE_INDICATOR);
         mBannerMealDetailTopPicture.setIndicatorGravity(BannerConfig.CENTER);
-        mBannerMealDetailTopPicture.setImages(bannerImgs);
+        mBannerMealDetailTopPicture.setImages(imgUrls);
 
         mBannerMealDetailTopPicture.setImageLoader(new ImageLoader() {
             @Override
@@ -257,12 +301,7 @@ public class AtyMealDetail extends AppCompatActivity {
             public void OnBannerClick(int position) {
                 //这句不能少，否则对话框出不来
                 getDeviceDensity();
-                List<String> imgUrls = new ArrayList<>();
-                imgUrls.add("http://img5.imgtn.bdimg.com/it/u=826278277,629944972&fm=27&gp=0.jpg");
-                imgUrls.add("http://img0.imgtn.bdimg.com/it/u=1234429428,4233304918&fm=27&gp=0.jpg");
-                imgUrls.add("http://img0.imgtn.bdimg.com/it/u=906037492,3221559314&fm=27&gp=0.jpg");
-                imgUrls.add("http://img3.imgtn.bdimg.com/it/u=3142704261,1326815248&fm=200&gp=0.jpg");
-                imgUrls.add("http://img5.imgtn.bdimg.com/it/u=508577620,943812775&fm=27&gp=0.jpg");
+
 
                 new ImageBrowserDialog(AtyMealDetail.this, imgUrls, position).show();
             }
@@ -294,4 +333,53 @@ public class AtyMealDetail extends AppCompatActivity {
         mBannerMealDetailTopPicture.stopAutoPlay();
     }
 
+    @OnClick({R.id.fab_meal_detail, R.id.fab_comment, R.id.fab_thumb, R.id.fab_rent})
+    public void onViewClicked(View view) {
+        switch (view.getId()) {
+            case R.id.fab_meal_detail:
+                mIMealDetailPresenter.addCollect(SpUtils.getInstance().getString(AtyLogin
+                        .SESSION_USERNAME, ""), mHouse.getHouseName());
+                break;
+            case R.id.fab_comment:
+                View dialogView = getLayoutInflater().inflate(R.layout.comment_dialog_view, null);
+                final EditText editText = (EditText) dialogView.findViewById(R.id.dialog_edit);
+                AlertDialog dialog = new AlertDialog.Builder(this)
+                        .setIcon(R.mipmap.icon)//设置标题的图片
+                        .setTitle("请输入评论内容：")//设置对话框的标题
+                        .setView(dialogView)
+                        .setNegativeButton("取消", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                dialog.dismiss();
+                            }
+                        })
+                        .setPositiveButton("确定", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                String content = editText.getText().toString().trim();
+                                mIMealDetailPresenter.addCommentAndShowResult(content, mHouse.getHouseName());
+                                dialog.dismiss();
+                            }
+                        }).create();
+                dialog.show();
+                mFamMealDetailThumbAndComment.close(true);
+                break;
+            case R.id.fab_thumb:
+                ToastUtil.showShort(AtyMealDetail.this, "点赞");
+                mFamMealDetailThumbAndComment.close(true);
+                break;
+            case R.id.fab_rent:
+                ToastUtil.showShort(AtyMealDetail.this, "联系房东租房");
+                diallPhone("123456");
+                mFamMealDetailThumbAndComment.close(true);
+                break;
+        }
+    }
+
+    public void diallPhone(String phoneNum) {
+        Intent intent = new Intent(Intent.ACTION_DIAL);
+        Uri data = Uri.parse("tel:" + phoneNum);
+        intent.setData(data);
+        startActivity(intent);
+    }
 }

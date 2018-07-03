@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string-array name="type">
+        <item>一室</item>
+        <item>两室</item>
+        <item>三室</item>
+        <item>四室</item>
+    </string-array>
+</resources>

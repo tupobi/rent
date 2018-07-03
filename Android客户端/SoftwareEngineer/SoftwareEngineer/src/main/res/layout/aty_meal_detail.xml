@@ -85,10 +85,10 @@
                     android:id="@+id/tbl_meal_detail"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:background="#FFFAFE"
                     app:tabIndicatorColor="@color/colorAccent"
                     app:tabIndicatorHeight="1dp"
                     app:tabMode="fixed"
-                    android:background="#FFFAFE"
                     app:tabSelectedTextColor="@color/colorAccent2"
                     app:tabTextColor="@android:color/darker_gray">
 
@@ -127,7 +127,7 @@
             android:layout_height="wrap_content"
             android:layout_margin="16dp"
             android:clickable="true"
-            android:src="@drawable/ic_favorite_red_400_24dp"
+            android:src="@drawable/ic_bookmark_border_red_200_24dp"
             android:visibility="gone"
             app:backgroundTint="@color/colorAccent"
             app:layout_anchor="@id/abl_meal_detail"
@@ -152,24 +152,27 @@
         fab:menu_labels_singleLine="true">
 
         <com.github.clans.fab.FloatingActionButton
+            android:id="@+id/fab_comment"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:src="@drawable/ic_edit"
+            android:src="@drawable/ic_comment_red_200_24dp"
             fab:fab_label="评论"
             fab:fab_size="mini" />
 
         <com.github.clans.fab.FloatingActionButton
+            android:id="@+id/fab_thumb"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:src="@drawable/ic_edit"
+            android:src="@drawable/ic_thumb_up_red_200_24dp"
             fab:fab_label="点赞"
             fab:fab_size="mini" />
 
         <com.github.clans.fab.FloatingActionButton
+            android:id="@+id/fab_rent"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:src="@drawable/ic_edit"
-            fab:fab_label="收藏"
+            android:src="@drawable/ic_account_balance_red_200_24dp"
+            fab:fab_label="租房"
             fab:fab_size="mini" />
 
     </com.github.clans.fab.FloatingActionMenu>

@@ -6,27 +6,31 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 
 import java.util.List;
 
+import butterknife.BindView;
+import butterknife.ButterKnife;
 import cn.hhit.canteen.R;
+import cn.hhit.canteen.app.utils.http.HttpConfig;
 
 /**
  * Created by Administrator on 2018/4/30/030.
  */
 
 public class RvGuessLoveAdapter extends RecyclerView.Adapter<RvGuessLoveAdapter.MyViewHolder> {
-    private List<Integer> mData;
+    private List<String> mData;
     private Context mContext;
 
-    public RvGuessLoveAdapter(List<Integer> data, Context context) {
+    public RvGuessLoveAdapter(List<String> data, Context context) {
         mData = data;
         mContext = context;
     }
 
-    public void setData(List<Integer> data) {
+    public void setData(List<String> data) {
         mData = data;
     }
 
@@ -38,8 +42,11 @@ public class RvGuessLoveAdapter extends RecyclerView.Adapter<RvGuessLoveAdapter.
 
     @Override
     public void onBindViewHolder(MyViewHolder holder, final int position) {
-        Glide.with(mContext).load(mData.get(position)).into(holder.ivGuessLove);
+        Glide.with(mContext).load(HttpConfig.PIC_BASE_URL + mData.get(position)).into(holder
+                .mIvGuessloveMeal);
 
+        holder.mTvGuessLoveThumb.setText("" + (int) (10 + Math.random() * 10));
+        holder.mTvGuessLoveCollect.setText("" + (int) (0 + Math.random() * 10));
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -54,11 +61,16 @@ public class RvGuessLoveAdapter extends RecyclerView.Adapter<RvGuessLoveAdapter.
     }
 
     class MyViewHolder extends RecyclerView.ViewHolder {
-        private ImageView ivGuessLove;
+        @BindView(R.id.iv_guesslove_meal)
+        ImageView mIvGuessloveMeal;
+        @BindView(R.id.tv_guess_love_thumb)
+        TextView mTvGuessLoveThumb;
+        @BindView(R.id.tv_guess_love_collect)
+        TextView mTvGuessLoveCollect;
 
         public MyViewHolder(View itemView) {
             super(itemView);
-            ivGuessLove = itemView.findViewById(R.id.iv_guesslove_meal);
+            ButterKnife.bind(this, itemView);
         }
     }
 

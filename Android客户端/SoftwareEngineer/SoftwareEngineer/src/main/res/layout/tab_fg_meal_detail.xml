@@ -13,6 +13,7 @@
         android:orientation="vertical">
 
         <TextView
+            android:id="@+id/house_name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="九号线独立卫浴合租单间"
@@ -33,6 +34,7 @@
                 android:textColor="@color/secondary_text" />
 
             <TextView
+                android:id="@+id/house_eyes_passed"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="651"
@@ -53,6 +55,7 @@
                 android:textSize="16sp" />
 
             <TextView
+                android:id="@+id/tv_house_now_price"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginRight="3dp"
@@ -66,6 +69,8 @@
                 android:layout_gravity="bottom">
 
                 <TextView
+                    android:layout_centerInParent="true"
+                    android:id="@+id/tv_house_origin_price"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="￥1500"
@@ -109,6 +114,7 @@
                 android:textStyle="bold" />
 
             <TextView
+                android:id="@+id/house_description"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
@@ -137,6 +143,7 @@
                     android:textColor="@color/secondary_text" />
 
                 <TextView
+                    android:id="@+id/house_type"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="一室"
@@ -156,6 +163,7 @@
                     android:textColor="@color/secondary_text" />
 
                 <TextView
+                    android:id="@+id/house_area"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="新浦区"
@@ -175,6 +183,7 @@
                     android:textColor="@color/secondary_text" />
 
                 <TextView
+                    android:id="@+id/house_detail_address"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="新浦区，苍梧路59号，淮海工学院11111111111111111111111111111111111111111111111"
@@ -194,6 +203,7 @@
                     android:textColor="@color/secondary_text" />
 
                 <TextView
+                    android:id="@+id/house_contact"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="18451114384"

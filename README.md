@@ -33,7 +33,34 @@
   | pic5Url          | varchar  | 1024     | false    | false    | 第5张房源图片URL                        |
   | pic6Url          | varchar  | 1024     | false    | false    | 第6张房源图片URL                        |
 
+- 历史表：history(浏览记录和收藏表)
+
+  | 字段名userName | 字段类型 | 字段长度 | 是否主键 | 不允许空 | 字段描述     |
+  | -------------- | -------- | -------- | -------- | -------- | ------------ |
+  | userName       | varchar  | 32       | true     | true     | 租客username |
+  | houseName      | varchar  | 32       | true     | true     | 房源名称     |
+  | history        | int      | 4        |          |          | 是否浏览过   |
+  | collect        | int      | 4        |          |          | 是否收藏     |
+
+- 评论表：comment
+
+  | 字段名userName | 字段类型 | 字段长度 | 是否主键 | 不允许空 | 字段描述   |
+  | -------------- | -------- | -------- | -------- | -------- | ---------- |
+  | userName       | varchar  | 32       | true     | true     | 评论者账号 |
+  | houseName      | varchar  | 32       | true     | true     | 评论的房源 |
+  | content        | varchar  | 512      | false    | true     | 评论内容   |
+  | date           | varchar  | 32       | false    | true     | 评论日期   |
+  | avatarUrl      | varchar  | 512      | false    | true     | 用户头像   |
+
 ## 记一次天坑
 
 - debug时如果配置混淆了，千万记得在proguard中将bean对象keep了！！！如果入坑，表现的特点就是与服务器交互完全没毛病，但是得到的数据在反射机制的作用下找不大相应的setget方法，所以是拿不到数据的。
+
 - 鲁班压缩如果异步的话，还没压缩完，没得到数据，而结果在主线程内，那么主线程可能先执行了，数据为空。
+
+- retrofit get post数据乱码，不是后台问题：将API改为提交表单数据，或者后台将ISO1869改成UTF-8：
+
+  ```java
+  @FormUrlEncoded
+  @POST("{add_collect}")
+  ```

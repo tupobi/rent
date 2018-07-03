@@ -35,6 +35,62 @@
     <servlet-name>UploadHouse</servlet-name>
     <servlet-class>com.tupobi.android.UploadHouse</servlet-class>
   </servlet>
+  <servlet>
+    <description>This is the description of my J2EE component</description>
+    <display-name>This is the display name of my J2EE component</display-name>
+    <servlet-name>GetAllHousesInfo</servlet-name>
+    <servlet-class>com.tupobi.android.GetAllHousesInfo</servlet-class>
+  </servlet>
+  <servlet>
+    <description>This is the description of my J2EE component</description>
+    <display-name>This is the display name of my J2EE component</display-name>
+    <servlet-name>GetHouseByUsername</servlet-name>
+    <servlet-class>com.tupobi.android.GetHouseByUsername</servlet-class>
+  </servlet>
+  <servlet>
+    <description>This is the description of my J2EE component</description>
+    <display-name>This is the display name of my J2EE component</display-name>
+    <servlet-name>AddHistory</servlet-name>
+    <servlet-class>com.tupobi.android.AddHistory</servlet-class>
+  </servlet>
+  <servlet>
+    <description>This is the description of my J2EE component</description>
+    <display-name>This is the display name of my J2EE component</display-name>
+    <servlet-name>AddCollect</servlet-name>
+    <servlet-class>com.tupobi.android.AddCollect</servlet-class>
+  </servlet>
+  <servlet>
+    <description>This is the description of my J2EE component</description>
+    <display-name>This is the display name of my J2EE component</display-name>
+    <servlet-name>GetHouseByHistory</servlet-name>
+    <servlet-class>com.tupobi.android.GetHouseByHistory</servlet-class>
+  </servlet>
+  <servlet>
+    <description>This is the description of my J2EE component</description>
+    <display-name>This is the display name of my J2EE component</display-name>
+    <servlet-name>GetHouseByCollect</servlet-name>
+    <servlet-class>com.tupobi.android.GetHouseByCollect</servlet-class>
+  </servlet>
+  <servlet>
+    <description>This is the description of my J2EE component</description>
+    <display-name>This is the display name of my J2EE component</display-name>
+    <servlet-name>AddComment</servlet-name>
+    <servlet-class>com.tupobi.android.AddComment</servlet-class>
+  </servlet>
+  <servlet>
+    <description>This is the description of my J2EE component</description>
+    <display-name>This is the display name of my J2EE component</display-name>
+    <servlet-name>GetComments</servlet-name>
+    <servlet-class>com.tupobi.android.GetComments</servlet-class>
+  </servlet>
+
+
+
+
+
+
+
+
 
 
 
@@ -59,6 +115,38 @@
   <servlet-mapping>
     <servlet-name>UploadHouse</servlet-name>
     <url-pattern>/servlet/UploadHouse</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>GetAllHousesInfo</servlet-name>
+    <url-pattern>/servlet/GetAllHousesInfo</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>GetHouseByUsername</servlet-name>
+    <url-pattern>/servlet/GetHouseByUsername</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>AddHistory</servlet-name>
+    <url-pattern>/servlet/AddHistory</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>AddCollect</servlet-name>
+    <url-pattern>/servlet/AddCollect</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>GetHouseByHistory</servlet-name>
+    <url-pattern>/servlet/GetHouseByHistory</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>GetHouseByCollect</servlet-name>
+    <url-pattern>/servlet/GetHouseByCollect</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>AddComment</servlet-name>
+    <url-pattern>/servlet/AddComment</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>GetComments</servlet-name>
+    <url-pattern>/servlet/GetComments</url-pattern>
   </servlet-mapping>	
   <welcome-file-list>
     <welcome-file>index.jsp</welcome-file>

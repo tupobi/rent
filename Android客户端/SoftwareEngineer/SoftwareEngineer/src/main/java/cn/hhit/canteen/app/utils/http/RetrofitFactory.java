@@ -39,7 +39,7 @@ public class RetrofitFactory {
                 .client(mOkHttpClient).build();
         APIFunction = mRetrofit.create(APIFunction.class);
         LogUtil.e("初始化RetrofitFactory");
-
+//        new GsonBuilder().setLenient().create() 设置可解析特殊字符
     }
     public static RetrofitFactory getInstence() {
         if (mRetrofitFactory == null) {

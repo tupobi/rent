@@ -25,7 +25,7 @@ import cn.hhit.canteen.app.utils.ToastUtil;
 import cn.hhit.canteen.main.presenter.IVersionCheckBiz;
 import cn.hhit.canteen.main.presenter.VersionCheckBizImpl;
 import cn.hhit.canteen.main.presenter.download.service.DownloadService;
-import cn.hhit.canteen.page_rented.FgRented;
+import cn.hhit.canteen.page_history.view.FgHistory;
 import cn.hhit.canteen.page_rentedhouse.view.FgRentedHouse;
 import cn.hhit.canteen.page_user.view.FgUser;
 import me.majiajie.pagerbottomtabstrip.NavigationController;
@@ -83,7 +83,7 @@ public class AtyMain extends AppCompatActivity implements IVersionCheckView {
 
         this.mNavigationController = this.pageBottomTabLayout.material().addItem((int) R.drawable
                 .ic_sign_in_normal, (int) R.drawable.ic_sign_in_selected, "房源", this.testColors[1]).addItem((int) R.drawable
-                .ic_history_normal, (int) R.drawable.ic_history_selected, "已租", this.testColors[1]).addItem((int) R.drawable
+                .ic_history_normal, (int) R.drawable.ic_history_selected, "历史", this.testColors[1]).addItem((int) R.drawable
                 .ic_user_info_normal, (int) R.drawable.ic_user_info_selected, mResources
                 .getString(R.string.bottom_tag_user), this.testColors[1]).setDefaultColor
                 (-1979711489).setMode(3).build();
@@ -91,7 +91,7 @@ public class AtyMain extends AppCompatActivity implements IVersionCheckView {
 //        ViewPager viewPager = (ViewPager) findViewById(R.id.view_pager);
         this.fragments = new ArrayList();
         this.fragments.add(new FgRentedHouse(this));
-        this.fragments.add(new FgRented(this));
+        this.fragments.add(new FgHistory(this));
         this.fragments.add(new FgUser(this));
 //        MyViewPagerAdapter pagerAdapter = new MyViewPagerAdapter(getSupportFragmentManager(),
 //                this.mNavigationController.getItemCount(), this.fragments);
